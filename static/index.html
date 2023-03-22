@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="cache-control" content="max-age=3600">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <!--web app全屏-->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <!--隐藏状态栏-->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <!--uc全屏  qq全屏-->
+  <meta name="full-screen" content="yes">
+  <meta name="browsermode" content="application">
+  <meta name="x5-orientation" content="portrait">
+  <meta name="x5-fullscreen" content="true">
+  <meta name="x5-page-mode" content="app">
+  <title>航空航班数据可视化平台</title>
+  <link href="images/favicon.png" rel="shortcut icon" />
+  <script>
+    (function checkBrowser() {
+      if (!!window.ActiveXObject || "ActiveXObject" in window) {
+        window.location.href = 'Browser.html';
+      } else {
+        if (!(window.Worker && window.indexedDB)) {
+          window.location.href = 'Browser.html'
+        }
+      }
+    })();
+
+    (function setFontSize() {
+      //console.log("浏览器的字体大小:" + getComputedStyle(document.documentElement, false)['fontSize']);
+      let userFontSize = parseFloat(getComputedStyle(document.documentElement, false)['fontSize']);
+      let ratio = 16 / userFontSize;
+      let fontSize = (innerWidth / 1536 * 0.625) * 10 * ratio;
+      document.documentElement.style.fontSize = fontSize + "rem";
+      window.onresize = function () {
+        fontSize = (innerWidth / 1536 * 0.625) * 10 * ratio;
+        document.documentElement.style.fontSize = fontSize + "rem";
+      }
+    })();
+  </script>
+  <link href="css/css/font-awesome.css" rel="stylesheet" />
+  <link href="css/index.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div id="box">
+    <header>
+      <div id="logo">
+        『航空航班数据可视化平台』
+      </div>
+      <div id="info">
+        <code id="typingInfo" class="typing1">
+          <i>2023年</i>
+          <i id="infoTime">3月22日</i>
+          <span id="typingInfoCity">重庆市</span>
+          <code id="infoType"></code>
+        进出港<span id="infoNumFlights">259</span>架次。
+        <code id="infoHome_country">通往全国</code>
+        <span id="infoNumCitys">0</span>个城市/区
+        </code>
+      </div>
+      <i class="fa fa-arrows-alt" title="全屏 (点击任意一处/键盘按下任意键)" tool="FullScreen"></i>
+      <i class="fa fa-search" title="搜索 CTRL+F" tool="search"></i>
+    </header>
+    <div id="chart" class="indexPageAnimation">
+      <div chart="1"></div>
+      <div chart="2"></div>
+      <div chart="3"></div>
+      <div chart="4"></div>
+      <div chart="5"></div>
+      <div chart="6"></div>
+      <div chart="7">
+        <div id="chart7Xian"></div>
+        <i id="chart7FlightNum">0</i>
+        <i id="chart7FlightNumTitle">航班数 / (架次)</i>
+        <i id="chart7RankingTitle">机场繁荣排名</i>
+        <i id="chart7Ranking">0</i>
+        <i id="chart7RankSplit">/</i>
+        <i id="chart7RankSum">0</i>
+      </div>
+      <div chart="8">
+      </div>
+    </div>
+  </div>
+
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="layui/layui.js"></script>
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="js/echarts@5.4.1.min.js"></script>
+  <script src="js/echarts-wordcloud.min.js"></script>
+  <script src="js/countUp.min.js"></script>
+  <script src="map/js/china.js"></script>
+  <script src="map/js/chinaCity.js"></script>
+  <script src="js/index.js"></script>
+</body>
+
+</html>
